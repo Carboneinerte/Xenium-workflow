@@ -1,3 +1,25 @@
+v. 6 (10/24/24)
+*New feature* : Optional batch correction during Banksy (Harmony)
+
+*Output*:
+* Fold-change, pvalue can be automatically extracted for all cell types
+
+*UMAP*:
+- New UMAP to plot gene expression accross UMAP
+- Only use UMAP from Banksy
+
+*Sub-clustering*:
+* improved workflow by automatically using cluster number when creating the dictionary to rename cell types
+* added visualization of UMAP and PCA
+* added option to choose between leiden and kmeans algorithms
+* added visualization of markers genes for subclusters
+
+*Analysis*:
+* reorganized the analysis section to separate celltype, regions and both
+* added plotting of violin plots, stacked violin plots
+* Dotplot for markers genes
+
+
 v. **5.31** (09/24/24)
 *New feature*: Now supporting multi-sample Banksy
 * Now all samples from a same experiment can be process at the same time and automatically with Banksy. The loop combine adatas and normalized/weighted expression into a dictionnary then used for dimension reduction and clustering.
