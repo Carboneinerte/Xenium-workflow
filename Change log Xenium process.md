@@ -1,4 +1,5 @@
-v. 6 (10/24/24)
+v. **6.0** (10/24/24)
+
 *New feature* : Optional batch correction during Banksy (Harmony)
 
 *Output*:
@@ -21,6 +22,7 @@ v. 6 (10/24/24)
 
 
 v. **5.31** (09/24/24)
+
 *New feature*: Now supporting multi-sample Banksy
 * Now all samples from a same experiment can be process at the same time and automatically with Banksy. The loop combine adatas and normalized/weighted expression into a dictionnary then used for dimension reduction and clustering.
 * Plot step will raise an error but is still essential to get the 'cell type' columns in results_df
