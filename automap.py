@@ -208,7 +208,7 @@ def smooth_boundary(contour, x_bins, y_bins):
 def plot_cells_and_chunks(df, grid, x_bins, y_bins):
     # Create a scatter plot for all cells
     plt.figure(figsize=(16, 10))
-    scatter = plt.scatter(df['x_pixel'], df['y_pixel'], c=df['cell_type_newnum'], cmap='tab20', s=0.5, alpha=0.6)
+    scatter = plt.scatter(df['x_pixel'], df['y_pixel'], c=df['cell_type_newnum_final'], cmap='tab20', s=0.5, alpha=0.6)
     
     # Get the colormap and normalize based on the number of cell types
     cmap = plt.cm.get_cmap('tab20')
@@ -295,7 +295,7 @@ def grid_to_geojson_with_scaling(grid, x_bins, y_bins, mapping_dict, scale_facto
             "type": "Feature",
             "geometry": mapping(merged_polygon),
             "properties": {
-                "cell_type_newnum": cell_type_newnum  # Store the cell type_newnum
+                "cell_type_newnum_final": cell_type_newnum  # Store the cell type_newnum
             }
         }
         
