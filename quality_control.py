@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 
 
-def plot_mcc_density (sample_1, save_plot = False, save_name = 'CC_mmc.png'):
+def plot_mcc_density (sample_1, save_plot = False, path_to_plot = 'plot', save_name = 'CC_mmc.png'):
     for sample in sample_1:
         df = pd.read_csv(f'D:\Jupyter_Notebook\Xenium_Jupyter_notebook\Correlation_Mapping\{sample}_CorrelationMapping.csv', comment = "#")
         df['sample'] = df['cell_id'].map(lambda name: name.split('_')[0])
@@ -30,10 +30,10 @@ def plot_mcc_density (sample_1, save_plot = False, save_name = 'CC_mmc.png'):
         save_name = f'CC_{sample_1[0]}.png'
 
     if save_plot:
-        plt.savefig('Gallery/save_name')
+        plt.savefig(f'{path_to_plot}/{save_name}')
 
 
-def desc_metrics(samples_ids, path_to_data, save_plot = False):
+def desc_metrics(samples_ids, path_to_data,path_to_plot = 'plot', save_plot = False):
     reference_dataset = pd.read_csv('data/reference_dataset.csv')
     
     parameters_to_plot = ['region_area', 'total_high_quality_decoded_transcripts','fraction_transcripts_decoded_q20', 'decoded_transcripts_per_100um2','estimated_number_of_false_positive_transcripts_per_cell',
@@ -64,10 +64,10 @@ def desc_metrics(samples_ids, path_to_data, save_plot = False):
         ax.set_title(parameter)
         ax.tick_params(axis = 'x', rotation = 90, direction = 'in', pad = -95)
     if save_plot:
-        fig.savefig(f'Gallery/{run_name}_QC.svg')
+        fig.savefig(f'{path_to_plot}/{run_name}_QC.svg')
 
 
-def desc_metrics_double(samples_ids_1, samples_ids_2, path_to_data, save_plot = False):
+def desc_metrics_double(samples_ids_1, samples_ids_2, path_to_data, path_to_plot = 'plot', save_plot = False):
     reference_dataset = pd.read_csv('data/reference_dataset.csv')
     
     parameters_to_plot = ['region_area', 'total_high_quality_decoded_transcripts','fraction_transcripts_decoded_q20',
@@ -110,4 +110,4 @@ def desc_metrics_double(samples_ids_1, samples_ids_2, path_to_data, save_plot = 
         ax.set_title(parameter)
         ax.tick_params(axis = 'x', rotation = 90, direction = 'in', pad = -95)
     if save_plot:
-        fig.savefig(f'Gallery/{run_name}_QC.svg')
+        fig.savefig(f'{path_to_plot}/{run_name}_QC.svg')
