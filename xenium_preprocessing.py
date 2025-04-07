@@ -2,7 +2,7 @@ import pandas as pd
 import scanpy as sc
 import os
 
-def import_xenium(dir, samples, samples_ids):
+def import_xenium(dir, dir_notebook, samples, samples_ids, name_dir):
     adatas = []
     for sample, sample_id in zip(samples, samples_ids):
         adata = sc.read_10x_h5(f"{dir}/{sample}/cell_feature_matrix.h5")
@@ -55,7 +55,7 @@ def import_xenium(dir, samples, samples_ids):
 
 #     return adata
 
-def mmc_merge(adata):
+def mmc_merge(adata, dir_notebook, name_dir):
     import glob
     dir_corr = f'{dir_notebook}/Correlation_Mapping/'
 
