@@ -3,6 +3,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 
+
 def plot_mcc_density (sample_1, save_plot = False, save_name = 'CC_mmc.png'):
     for sample in sample_1:
         df = pd.read_csv(f'D:\Jupyter_Notebook\Xenium_Jupyter_notebook\Correlation_Mapping\{sample}_CorrelationMapping.csv', comment = "#")
@@ -30,3 +31,83 @@ def plot_mcc_density (sample_1, save_plot = False, save_name = 'CC_mmc.png'):
 
     if save_plot:
         plt.savefig('Gallery/save_name')
+
+
+def desc_metrics(samples_ids, path_to_data, save_plot = False):
+    reference_dataset = pd.read_csv('data/reference_dataset.csv')
+    
+    parameters_to_plot = ['region_area', 'total_high_quality_decoded_transcripts','fraction_transcripts_decoded_q20', 'decoded_transcripts_per_100um2','estimated_number_of_false_positive_transcripts_per_cell',
+                      'num_cells_detected', 'fraction_transcripts_assigned', 'median_genes_per_cell', 'median_transcripts_per_cell' ]
+    
+
+    for sample in samples_ids:
+        with open(f"{path_to_data}\{sample}\metrics_summary.csv", 'r', encoding='utf-8') as file:
+            file_content = pd.read_csv(file)
+            
+            if 'files_content' in locals():
+                files_content = pd.concat([files_content,file_content])
+            else:
+                files_content = pd.DataFrame(file_content)
+
+    parameters_to_plot = ['region_area', 'total_high_quality_decoded_transcripts','fraction_transcripts_decoded_q20',
+                        'decoded_transcripts_per_100um2','estimated_number_of_false_positive_transcripts_per_cell','num_cells_detected',
+                        'fraction_transcripts_assigned', 'median_genes_per_cell', 'median_transcripts_per_cell' ]
+
+    fig, axes = plt.subplots(3,3, figsize=(15,15))
+    axes = axes.flatten()
+
+    for n, ax in enumerate(axes):
+        parameter = parameters_to_plot[n]
+        ax.bar(x = reference_dataset['region_name'], height = reference_dataset[parameters_to_plot[n]], color = (0.32,0.13,0.102))
+        ax.bar(x = files_content['region_name'], height = files_content[parameters_to_plot[n]], color = (0.898,0.603,0.32))
+        ax.hlines(y = files_content[parameters_to_plot[n]].mean(), xmin = 1, xmax = 6, linestyles= 'dashed', colors = 'black')
+        ax.set_title(parameter)
+        ax.tick_params(axis = 'x', rotation = 90, direction = 'in', pad = -95)
+    if save_plot:
+        fig.savefig(f'Gallery/{run_name}_QC.svg')
+
+
+def desc_metrics_double(samples_ids_1, samples_ids_2, path_to_data, save_plot = False):
+    reference_dataset = pd.read_csv('data/reference_dataset.csv')
+    
+    parameters_to_plot = ['region_area', 'total_high_quality_decoded_transcripts','fraction_transcripts_decoded_q20',
+                            'decoded_transcripts_per_100um2','estimated_number_of_false_positive_transcripts_per_cell','num_cells_detected',
+                            'fraction_transcripts_assigned', 'median_genes_per_cell', 'median_transcripts_per_cell' ]
+    
+    for sample in samples_ids_1:
+        with open(f"{path_to_data}\{sample}\metrics_summary.csv", 'r', encoding='utf-8') as file:
+            file_content_1 = pd.read_csv(file)
+            
+            if 'files_content_1' in locals():
+                files_content_1 = pd.concat([files_content_1,file_content_1])
+            else:
+                files_content_1 = pd.DataFrame(file_content_1)
+
+    for sample in samples_ids_2:
+        with open(f"{path_to_data}\{sample}\metrics_summary.csv", 'r', encoding='utf-8') as file:
+            file_content_2 = pd.read_csv(file)
+            
+            if 'files_content_2' in locals():
+                files_content_2 = pd.concat([files_content_2,file_content_2])
+            else:
+                files_content_2 = pd.DataFrame(file_content_2)
+
+    min_1 = 1
+    max_1 = min_1 + len(files_content_1) - 1 
+    min_2 = max_1 + 1
+    max_2 = min_2 + len(files_content_2) - 1
+
+    fig, axes = plt.subplots(3,3, figsize=(15,15))
+    axes = axes.flatten()
+
+    for n, ax in enumerate(axes):
+        parameter = parameters_to_plot[n]
+        ax.bar(x = reference_dataset['region_name'], height = reference_dataset[parameters_to_plot[n]], color = (0.32,0.13,0.102))
+        ax.bar(x = files_content_1['region_name'], height = files_content_1[parameters_to_plot[n]], color = (0.898,0.603,0.32))
+        ax.bar(x = files_content_2['region_name'], height = files_content_2[parameters_to_plot[n]], color = "lightblue")
+        ax.hlines(y = files_content_1[parameters_to_plot[n]].mean(), xmin = min_1, xmax = max_1, linestyles= 'dashed', colors = 'black')
+        ax.hlines(y = files_content_2[parameters_to_plot[n]].mean(), xmin = min_2, xmax = max_2, linestyles= 'dashed', colors = 'black')
+        ax.set_title(parameter)
+        ax.tick_params(axis = 'x', rotation = 90, direction = 'in', pad = -95)
+    if save_plot:
+        fig.savefig(f'Gallery/{run_name}_QC.svg')
