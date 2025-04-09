@@ -2,7 +2,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-
+# TODO: Add reference and average options to double
 
 def plot_mcc_density (sample_1, save_plot = False, path_to_plot = 'plot', save_name = 'CC_mmc.png'):
     for sample in sample_1:
@@ -33,8 +33,9 @@ def plot_mcc_density (sample_1, save_plot = False, path_to_plot = 'plot', save_n
         plt.savefig(f'{path_to_plot}/{save_name}')
 
 
-def desc_metrics(samples_ids, path_to_data,path_to_plot = 'plot', save_plot = False):
-    reference_dataset = pd.read_csv('data/reference_dataset.csv')
+def desc_metrics(samples_ids, path_to_data, reference = True, plot_average = True, path_to_plot = 'plot', save_plot = False):
+    if reference:
+        reference_dataset = pd.read_csv('data/reference_dataset.csv')
     
     parameters_to_plot = ['region_area', 'total_high_quality_decoded_transcripts','fraction_transcripts_decoded_q20', 'decoded_transcripts_per_100um2','estimated_number_of_false_positive_transcripts_per_cell',
                       'num_cells_detected', 'fraction_transcripts_assigned', 'median_genes_per_cell', 'median_transcripts_per_cell' ]
@@ -58,11 +59,13 @@ def desc_metrics(samples_ids, path_to_data,path_to_plot = 'plot', save_plot = Fa
 
     for n, ax in enumerate(axes):
         parameter = parameters_to_plot[n]
-        ax.bar(x = reference_dataset['region_name'], height = reference_dataset[parameters_to_plot[n]], color = (0.32,0.13,0.102))
+        if reference:
+            ax.bar(x = reference_dataset['region_name'], height = reference_dataset[parameters_to_plot[n]], color = (0.32,0.13,0.102))
         ax.bar(x = files_content['region_name'], height = files_content[parameters_to_plot[n]], color = (0.898,0.603,0.32))
-        ax.hlines(y = files_content[parameters_to_plot[n]].mean(), xmin = 1, xmax = 6, linestyles= 'dashed', colors = 'black')
+        if plot_average:
+            ax.hlines(y = files_content[parameters_to_plot[n]].mean(), xmin = 1, xmax = 6, linestyles= 'dashed', colors = 'black')
         ax.set_title(parameter)
-        ax.tick_params(axis = 'x', rotation = 90, direction = 'in', pad = -95)
+        ax.tick_params(axis = 'x', rotation = 90, direction = 'in', pad = -100)
     if save_plot:
         fig.savefig(f'{path_to_plot}/{run_name}_QC.svg')
 
@@ -111,3 +114,5 @@ def desc_metrics_double(samples_ids_1, samples_ids_2, path_to_data, path_to_plot
         ax.tick_params(axis = 'x', rotation = 90, direction = 'in', pad = -95)
     if save_plot:
         fig.savefig(f'{path_to_plot}/{run_name}_QC.svg')
+
+
