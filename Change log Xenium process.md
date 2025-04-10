@@ -89,15 +89,14 @@ v. **5.1** (2024-08-30)
   
 
 - To do:
-	- [ ] Automatize concatenation of Banksy’s adatas
 	- [ ]  find a way to save editable scatter plot (downsampling of clusters?)
 	- [ ]  fix ‘to_use’ in data visualization
 	- [ ]  order in legend (alphabetical, class?)
-	- [ ] Streamline Mapping from drawn regions
+	- [x] Streamline Mapping from drawn regions
 		- [x] resegmented runs
-		- [ ] other runs
-	- [ ] Make functions for plot of UMAP and sections
+		- [x] other runs
+	- [x] Make functions for plot of UMAP and sections
 	- [x] Automatically relevant cells information and normalized gene count
 		- [x] These CSV are already of 1Go for 6 samples / 247 genes, we need a better solution to be ready to work with the 5k panel
 			- [x] Zarr? Gzip?
-	- [ ] What the point of these columns?![[Pasted image 20240906105141.png]]
+	- [ ] only keep useful columns to reduce size of files
