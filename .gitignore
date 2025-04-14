@@ -1,7 +1,8 @@
 Gallery/
 data/
 Archive/
-__pychache__/
+__pycache__/
 .Rproj.user
+*.R*
+__pycache__/
 *_test.ipynb
-.Rhistory
