@@ -33,7 +33,7 @@ def plot_mcc_density (sample_1, save_plot = False, path_to_plot = 'plot', save_n
         plt.savefig(f'{path_to_plot}/{save_name}')
 
 
-def desc_metrics(samples_ids, path_to_data, run_name = run_name, reference = True, plot_average = True, path_to_plot = 'plot', save_plot = False):
+def desc_metrics(samples_ids, path_to_data, run_name = 'run_name', reference = True, plot_average = True, path_to_plot = 'plot', save_plot = False):
     if reference:
         reference_dataset = pd.read_csv('data/reference_dataset.csv')
     
@@ -78,7 +78,7 @@ def desc_metrics(samples_ids, path_to_data, run_name = run_name, reference = Tru
         fig.savefig(f'{path_to_plot}/{run_name}_QC.svg')
 
 
-def desc_metrics_double(samples_ids_1, samples_ids_2, path_to_data, run_name = run_name, reference = True, plot_average = True,  path_to_plot = 'plot', save_plot = False):
+def desc_metrics_double(samples_ids_1, samples_ids_2, path_to_data_1, path_to_data_2, run_name = 'run_name', reference = True, plot_average = True,  path_to_plot = 'plot', save_plot = False):
     reference_dataset = pd.read_csv('data/reference_dataset.csv')
     
     parameters_to_plot = ['region_area', 'total_high_quality_decoded_transcripts','fraction_transcripts_decoded_q20',
@@ -86,7 +86,7 @@ def desc_metrics_double(samples_ids_1, samples_ids_2, path_to_data, run_name = r
                             'fraction_transcripts_assigned', 'median_genes_per_cell', 'median_transcripts_per_cell' ]
     
     for sample in samples_ids_1:
-        with open(f"{path_to_data}\{sample}\metrics_summary.csv", 'r', encoding='utf-8') as file:
+        with open(f"{path_to_data_1}\{sample}\metrics_summary.csv", 'r', encoding='utf-8') as file:
             file_content_1 = pd.read_csv(file)
             
             if 'files_content_1' in locals():
@@ -95,7 +95,7 @@ def desc_metrics_double(samples_ids_1, samples_ids_2, path_to_data, run_name = r
                 files_content_1 = pd.DataFrame(file_content_1)
 
     for sample in samples_ids_2:
-        with open(f"{path_to_data}\{sample}\metrics_summary.csv", 'r', encoding='utf-8') as file:
+        with open(f"{path_to_data_2}\{sample}\metrics_summary.csv", 'r', encoding='utf-8') as file:
             file_content_2 = pd.read_csv(file)
             
             if 'files_content_2' in locals():
