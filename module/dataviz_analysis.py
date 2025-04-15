@@ -135,7 +135,9 @@ def cluster_plot(adata_to_plot, cluster_to_use = 'cell_type_newnum_final', clust
         adata_to_plot.obs['leiden_colors'] = adata_to_plot.obs[cluster_to_use].astype(int).apply(lambda x: palette[x])
 
         # Map all cells
-        fig, axs = plt.subplots(3,4,figsize=(20,10))
+        b = int(adata_to_plot.obs['sample'].nunique() / 3)
+        fig, axs = plt.subplots(b,3,
+                                figsize=(15,25))
         axs = axs.flatten()# Mapping of clusters
 
         if cluster_to_map != 'all':
@@ -161,6 +163,9 @@ def cluster_plot(adata_to_plot, cluster_to_use = 'cell_type_newnum_final', clust
                     colors = cluster_data['leiden_colors'].unique()[0] ### for all clusters
                 axs[idx].scatter(cluster_data['x_centroid'], cluster_data['y_centroid'], color=colors, s=0.005, label=cluster_data[label_to_use].unique()[0])
                 axs[idx].set_title(f"Sample {sample}")
+                axs[idx].xaxis.set_tick_params(labelbottom=False)
+                axs[idx].yaxis.set_tick_params(labelleft=False)
+                axs[idx].set_aspect('equal', adjustable='box')
         plt.legend(markerscale=50, scatterpoints=1000, bbox_to_anchor=(1.02, 1), loc='upper left', borderaxespad=0)
         plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=0.3, hspace=0.3)
 
