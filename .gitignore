@@ -4,5 +4,4 @@ Archive/
 __pycache__/
 .Rproj.user
 *.R*
-__pycache__/
 *_test.ipynb
