@@ -35,6 +35,7 @@ import matplotlib.patches as mpatches
 
 def umap_plot_indi_multi(adata_to_plot, cluster_to_use = 'cell_type_newnum_final', individual_plot = True, save_plot = False, cmap_ = 'hls'):
 
+
     adata_to_plot.obsm['umap'] = adata_to_plot.obsm['reduced_pc_20_umap']
     adata_to_plot.obs['umap-1'] = adata_to_plot.obsm['umap'][:, 0]
     adata_to_plot.obs['umap-2'] = adata_to_plot.obsm['umap'][:, 1]
@@ -56,7 +57,7 @@ def umap_plot_indi_multi(adata_to_plot, cluster_to_use = 'cell_type_newnum_final
         axs = axs.flatten()
 
         def plot_umap(adata_to_plot, color_column, ax, title=None):
-            scatter = ax.scatter(adata_to_plot.obs['umap-3'], adata_to_plot.obs['umap-4'], c=adata_to_plot.obs[color_column], s=0.1, alpha=0.8)
+            scatter = ax.scatter(adata_to_plot.obs['umap-3'], adata_to_plot.obs['umap-4'], c=adata_to_plot.obs[color_column], s=0.05, alpha=0.8)
             ax.set_title(title)
             ax.axis('off')
         samples_ids = adata_to_plot.obs['sample'].unique()
@@ -186,7 +187,7 @@ def polygonplot_dataprep(adata_main, sample_to_plot, cluster_to_use = 'cell_type
 
     adata_plot = adata_main[adata_main.obs['sample']==all_samples[sample_position]]
     
-    cells_geo = gpd.read_file(f'coordinates/polygons/{all_samples[sample_position]}_cells.geojson')
+    cells_geo = gpd.read_file(f'{dir_notebook}/coordinates/polygons/{all_samples[sample_position]}_cells.geojson')
     cells_geo['centroid'] = cells_geo['geometry'].centroid
     cells_geo['x_coor'] = cells_geo['centroid'].x
     cells_geo['y_coor'] = cells_geo['centroid'].y
