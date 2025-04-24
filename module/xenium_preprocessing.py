@@ -1,6 +1,7 @@
 import pandas as pd
 import scanpy as sc
 import os
+from module.misc import list_annotations
 
 def import_xenium(dir, dir_notebook, samples, samples_ids, name_dir):
     adatas = []
@@ -36,26 +37,8 @@ def import_xenium(dir, dir_notebook, samples, samples_ids, name_dir):
 
     return adata
 
-### Do not use, takes forever to run for some reason
-# def mmc_merge(adata, samples, dir_notebook): 
-#     all_dict ={}
-#     for sample in samples:
-#         HC3_MMC = pd.read_csv(f"{dir_notebook}/Correlation_Mapping/{sample}_CorrelationMapping.csv",comment = "#")
-#         HC3_MMC.index = HC3_MMC['cell_id']
-#         HC3_MMC.index.name = None
-#         HC3_MMC.columns = [f"mmc:{i}" for i in HC3_MMC.columns]
-#         dict_temp = {"mmc:class_name" : dict(zip(HC3_MMC['mmc:cell_id'], HC3_MMC['mmc:class_name'])),
-#                      "mmc_dict_classcoef" : dict(zip(HC3_MMC['mmc:cell_id'], HC3_MMC['mmc:class_correlation_coefficient'])),
-#                     "mmc_dict_subclass" : dict(zip(HC3_MMC['mmc:cell_id'], HC3_MMC['mmc:subclass_name'])),
-#                     "mmc_dict_supertype" : dict(zip(HC3_MMC['mmc:cell_id'], HC3_MMC['mmc:supertype_name'])),}
-#         all_dict.update(dict_temp)
-
-#     adata.obs['mmc:class_name'] = adata.obs['mmc:class_correlation_coefficient'] = adata.obs['mmc:subclass_name'] = adata.obs['mmc:supertype_name'] = adata.obs['cell_id']
-#     adata.obs.replace(all_dict)
-
-#     return adata
-
 def mmc_merge(adata, dir_notebook, name_dir):
+
     import glob
     dir_corr = f'{dir_notebook}/Correlation_Mapping/'
 
@@ -83,3 +66,16 @@ def mmc_merge(adata, dir_notebook, name_dir):
     adata.obs['mmc:supertype_name'] = adata.obs['cell_id'].map(mmc_dict_supertype)
 
     return adata
+
+
+def add_annotations(adata, df):
+    if 'cell_id' not in df.columns:
+        df['cell_id'] = df.index
+    
+    list_anno = list_annotations()
+    list_anno = [anno for anno in list_anno if anno in adata.obs.columns]
+    for anno in list_anno:
+        dict_temp = dict(zip(adata.obs['cell_id'], adata.obs[anno]))
+        df[anno] = df['cell_id'].map(dict_temp)
+    
+    return df
