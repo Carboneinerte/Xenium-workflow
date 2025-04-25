@@ -58,7 +58,7 @@ def desc_metrics(samples_ids, path_to_data, run_name = 'run_name', reference = T
         min_1 = 1
     else:
         min_1 = 0
-    max_1 = min_1 + len(files_content_1) - 1 
+    max_1 = min_1 + len(files_content) - 1 
 
 
     fig, axes = plt.subplots(3,3, figsize=(15,15))
