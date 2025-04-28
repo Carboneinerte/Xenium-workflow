@@ -5,35 +5,15 @@ from IPython.display import display
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
-import math
 import numpy as np
-import os
 import pandas as pd
-import random
 import seaborn as sns
-import scanpy as sc
-import scanpy.external as sce
-from scipy import stats
-from scipy.interpolate import CubicSpline
-from scipy.io import mmread
-from scipy.optimize import curve_fit
-import scipy.sparse as sparse
-from scipy.stats import pearsonr, pointbiserialr
-from shapely.geometry import Polygon, mapping, MultiPolygon
-from shapely.ops import unary_union
-from skimage import measure
-from sklearn.cluster import KMeans
-from sklearn.metrics import adjusted_rand_score
-from sklearn.neighbors import NearestNeighbors
-from sklearn.neighbors import KNeighborsClassifier
-import warnings
 import pytz
-
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
 
-def umap_plot_indi_multi(adata_to_plot, cluster_to_use = 'cell_type_newnum_final', individual_plot = True, save_plot = False, cmap_ = 'hls'):
+def umap_plot_indi_multi(adata_to_plot, cluster_to_use = 'cell_type_newnum_final', individual_plot = True, save_plot = False, cmap_ = 'hls', name_dir = name_dir, dir_notebook = dir_notebook):
 
 
     adata_to_plot.obsm['umap'] = adata_to_plot.obsm['reduced_pc_20_umap']
@@ -106,7 +86,7 @@ def umap_plot_indi_multi(adata_to_plot, cluster_to_use = 'cell_type_newnum_final
             plt.savefig(f"plot/{name_dir}/{name_dir}_UMAP_all.png")
     
 
-def cluster_plot(adata_to_plot, cluster_to_use = 'cell_type_newnum_final', cluster_to_map = 'all', cmap_ = 'tab20b', save_plot = False, ):
+def cluster_plot(adata_to_plot, cluster_to_use = 'cell_type_newnum_final', cluster_to_map = 'all', cmap_ = 'tab20b', save_plot = False, name_dir = name_dir, dir_notebook = dir_notebook):
 
     label_to_use = cluster_to_use
     test_dict = {
