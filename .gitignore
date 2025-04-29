@@ -5,3 +5,4 @@ __pycache__/
 .Rproj.user
 *.R*
 *_test.ipynb
+csv/
