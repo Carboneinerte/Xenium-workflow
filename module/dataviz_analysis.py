@@ -12,6 +12,14 @@ import pytz
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
+# a=2
+# c = 'celltype'
+# match c:
+#     case 'celltype':
+#         print(a)
+#     case 1:
+#         print(a+1)
+
 
 def umap_plot_indi_multi(adata_to_plot, cluster_to_use = 'cell_type_newnum_final', individual_plot = True, save_plot = False, cmap_ = 'hls', name_dir = name_dir, dir_notebook = dir_notebook):
 
