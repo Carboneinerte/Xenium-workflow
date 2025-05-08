@@ -21,7 +21,8 @@ import matplotlib.patches as mpatches
 #         print(a+1)
 
 
-def umap_plot_indi_multi(adata_to_plot, cluster_to_use = 'cell_type_newnum_final', individual_plot = True, save_plot = False, cmap_ = 'hls', name_dir = name_dir, dir_notebook = dir_notebook):
+def umap_plot_indi_multi(adata_to_plot, cluster_to_use = 'cell_type_newnum_final', individual_plot = True,
+                         save_plot = False, cmap_ = 'hls', name_dir = name_dir, dir_notebook = dir_notebook):
 
 
     adata_to_plot.obsm['umap'] = adata_to_plot.obsm['reduced_pc_20_umap']
@@ -60,7 +61,7 @@ def umap_plot_indi_multi(adata_to_plot, cluster_to_use = 'cell_type_newnum_final
         plt.show()
         
         if save_plot == True:
-            plt.savefig(f"plot/{name_dir}/{name_dir}_UMAP_{cluster_to_use}.png")
+            plt.savefig(f"{dir_notebook}/plot/{name_dir}/{name_dir}_UMAP_{cluster_to_use}.png")
         
     ####
     else:
@@ -91,10 +92,11 @@ def umap_plot_indi_multi(adata_to_plot, cluster_to_use = 'cell_type_newnum_final
         plt.legend(markerscale=20, scatterpoints=1000, bbox_to_anchor=(1.02, 1), loc='upper left', borderaxespad=0)
         
         if save_plot == True:
-            plt.savefig(f"plot/{name_dir}/{name_dir}_UMAP_all.png")
+            plt.savefig(f"{dir_notebook}/plot/{name_dir}/{name_dir}_UMAP_all.png")
     
 
-def cluster_plot(adata_to_plot, cluster_to_use = 'cell_type_newnum_final', cluster_to_map = 'all', cmap_ = 'tab20b', save_plot = False, name_dir = name_dir, dir_notebook = dir_notebook):
+def cluster_plot(adata_to_plot, cluster_to_use = 'cell_type_newnum_final', cluster_to_map = 'all',
+                  cmap_ = 'tab20b', save_plot = False, name_dir = name_dir, dir_notebook = dir_notebook):
 
     label_to_use = cluster_to_use
     test_dict = {
@@ -266,12 +268,15 @@ def polygonplot_plot(df, cells_geo, cluster_to_use, gene_ = None, region_ = None
     )
     cells_geo_crop.plot(ax=ax,
                         color = cells_geo_crop['leiden_colors'],
-                        alpha=0.75,
+                        alpha=0.85,
                         aspect=1,
                         zorder=1,
                         edgecolor = cells_geo_crop['leiden_colors'],
                     )
     ax.set_aspect('equal', adjustable='box')
+
+    cells_geo_crop.boundary.plot(ax=ax,
+                                 color = cells_geo_crop['leiden_colors'],)
 
     if gene_ != None:
         cells_geo_crop_bis = cells_geo_crop[cells_geo_crop[gene_] > 0]
@@ -286,7 +291,6 @@ def polygonplot_plot(df, cells_geo, cluster_to_use, gene_ = None, region_ = None
                     legend=False,
                     edgecolor="black",
                     linewidth = 0.5,
-                    # legend_kwds={"label": "Population in 2010", "orientation": "horizontal"},
         )
    
 

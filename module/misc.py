@@ -25,8 +25,7 @@ def cell_class():
         'Tanycyte': 'Epithelial',      
         'OPC' : 'Glial',
         'VLMC': 'Epithelial',      
-        'Choroid' :
-        'Epithelial',
+        'Choroid' : 'Epithelial',
         }
     return dict_temp
 
