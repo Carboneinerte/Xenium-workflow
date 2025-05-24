@@ -21,8 +21,8 @@ import matplotlib.patches as mpatches
 #         print(a+1)
 
 
-def umap_plot_indi_multi(adata_to_plot, cluster_to_use = 'cell_type_newnum_final', individual_plot = True,
-                         save_plot = False, cmap_ = 'hls', name_dir = name_dir, dir_notebook = dir_notebook):
+def umap_plot_indi_multi(adata_to_plot, name_dir, dir_notebook, cluster_to_use = 'cell_type_newnum_final', individual_plot = True,
+                         save_plot = False, cmap_ = 'hls'):
 
 
     adata_to_plot.obsm['umap'] = adata_to_plot.obsm['reduced_pc_20_umap']
@@ -95,8 +95,8 @@ def umap_plot_indi_multi(adata_to_plot, cluster_to_use = 'cell_type_newnum_final
             plt.savefig(f"{dir_notebook}/plot/{name_dir}/{name_dir}_UMAP_all.png")
     
 
-def cluster_plot(adata_to_plot, cluster_to_use = 'cell_type_newnum_final', cluster_to_map = 'all',
-                  cmap_ = 'tab20b', save_plot = False, name_dir = name_dir, dir_notebook = dir_notebook):
+def cluster_plot(adata_to_plot,name_dir, dir_notebook,cluster_to_use = 'cell_type_newnum_final', cluster_to_map = 'all',
+                  cmap_ = 'tab20b', save_plot = False):
 
     label_to_use = cluster_to_use
     test_dict = {

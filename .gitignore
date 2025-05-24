@@ -6,3 +6,4 @@ __pycache__/
 *.R*
 *_test.ipynb
 csv/
+figures/
