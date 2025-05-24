@@ -158,7 +158,7 @@ def cell_class_annotation(adata):
 
 #####
 import progressbar
-from module.misc import clock_genes_list
+from module.misc import genes_list
 
 def circascore_annot(adata, df):
     '''
@@ -171,7 +171,7 @@ def circascore_annot(adata, df):
 
     df['circascore']=0
 
-    clock_genes = clock_genes_list()
+    clock_genes = genes_list('clock')
 
     for n in range(0, len(df)):
         count_ = 0
