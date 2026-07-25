@@ -26,6 +26,8 @@ pip install -r requirements.txt
 
 pip install leidenalg, xlsxwriter, geojson, goatools, polars 
 ```
+(use: pip freeze > requirements.txt when changing packages version in the env. Here, I saved you yet another google search.)
+
 - Copy module/config.py and rename it as module/config_local.py
     - Define the folder containing raw files (**dir_raw**)
     - Define the folder containing processed files (**dir_processed**)
