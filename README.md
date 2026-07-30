@@ -1,3 +1,9 @@
+# Presentation
+The present repository contains a pipeline designed for analysis of single-cell spatial transcriptomics dataset. It was developt in the "Regulatory Biology Laboratory" at Salk Institute for Biological Studies (San Diego, USA).
+
+It is not as of today available as a package but feel free to follow to instructions below to install and use it.
+
+
 ## To do list before starting the analysis:
 
 -   Clone or copy repository from Github (main branch) where you want to store it. It will be your "dir_main" folder.
