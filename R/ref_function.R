@@ -1,9 +1,10 @@
 ### Preprocessing_data
-library(dplyr)
 library(arrow)
 library(MetaCycle)
 library(readr)
 library(knitr)
+
+if(!require(dplyr)){install.packages("dplyr")}
 
 PreProcessingData = function(run_name, circascore='all'){
   log_print("Start importing data : ")

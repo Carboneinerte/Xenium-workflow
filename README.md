@@ -1,6 +1,8 @@
 # Presentation
 The present repository contains a pipeline designed for analysis of single-cell spatial transcriptomics dataset. It was developt in the "Regulatory Biology Laboratory" at Salk Institute for Biological Studies (San Diego, USA).
 
+The workflow is designed to analyze Xenium dataset from scratch but other SC/SSC datasets can be imported and processed after the preprocessing part.
+
 It is not as of today available as a package but feel free to follow to instructions below to install and use it.
 
 
@@ -60,26 +62,31 @@ pip install leidenalg, xlsxwriter, geojson, goatools, polars
 -   Run [this notebook](./v11_Polygons_preprocessing.ipynb) if you plan to do plots with cell polygons
 -   Run [this notebook](./V11Z_Xenium_Quality_control.ipynb) to plot raw metrics and compare samples
 
-## Folder organization
+## Project Structure
+```
+root/
+│
+├── Pynda_ssc/          # contains git repo (="dir_main")
+│   ├── reference_files
+│   ├── module          # contains the .py files with the functions used in notebooks
+│   ├──notebooks_blank  # contains blank notebooks you will copy into your root folder to use
+├── raw_data            # contains raw files (="dir_raw")
+│   ├──  "Sample1"
+│   ├──  "Sample2"
+│   ├──  "..."
+├──  processed_data     # contains project outputs (="dir_processed")
+│   ├──  analysis
+│   ├──  coordinates
+│   ├──  Coorelation_Mapping
+│   ├──  csv            # Will also contain parquet files
+│   ├──  h5ad
+│   ├──  plot
+├── .gitignore          # Git ignore file
+├── README.md           # Project overview and instructions
+└── requirements.txt    # Python package dependencies
+```
 
-/root/\
- \|-- main (contains git repo)   (="dir_main")\
-   \|-- reference_files\
-   \|-- module (contains the .py files with the functions used in notebooks)\
-   \|-- notebooks_blank (contains blank notebook you will copy into your root folder to use)\
- \|-- raw_data   (="dir_raw")\
-   \|-- "Sample1"\
-   \|-- "Sample2"\
-   \|-- "..."\
- \|-- processed_data   (="dir_processed")\
-   \|-- analysis\
-   \|-- coordinates\
-   \|-- Coorelation_Mapping\
-   \|-- csv   (Will also contain parquet files)\
-   \|-- h5ad\
-   \|-- plot
-
-## List of minimum files to have in **data** directory (for each sample)
+## List of minimum files to have in **data** directory (Xenium ony, for each sample)
 
 -   cell_boundaries.parquet
 -   cell_feature_matrix.h5
