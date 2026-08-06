@@ -69,18 +69,18 @@ root/
 ├── Pynda_ssc/          # contains git repo (="dir_main")
 │   ├── reference_files
 │   ├── module          # contains the .py files with the functions used in notebooks
-│   ├──notebooks_blank  # contains blank notebooks you will copy into your root folder to use
+│   └── notebooks_blank  # contains blank notebooks you will copy into your root folder to use
 ├── raw_data            # contains raw files (="dir_raw")
 │   ├──  "Sample1"
 │   ├──  "Sample2"
-│   ├──  "..."
+│   └──  "..."
 ├──  processed_data     # contains project outputs (="dir_processed")
 │   ├──  analysis
 │   ├──  coordinates
 │   ├──  Coorelation_Mapping
 │   ├──  csv            # Will also contain parquet files
 │   ├──  h5ad
-│   ├──  plot
+│   └──  plot
 ├── .gitignore          # Git ignore file
 ├── README.md           # Project overview and instructions
 └── requirements.txt    # Python package dependencies
